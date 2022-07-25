@@ -26,5 +26,5 @@ print('\n=== Task #4 ===')
 # То есть, удалите все URL, хэштеги, упоминания, пунктуацию, RT и CC.
 tweet = '''Good advice! RT @TheNextWeb: What I would do differently if I was learning to code today https://t.co/lbwej0pxOd cc: @garybernhardt #rstats'''
 print('Before change: ',tweet)
-tweet = re.sub('(@\w*\W\s)*(RT\W)*(cc\W\s)*(#\w+\s*)*(http.+)*(\s{2})*','',tweet)      # remove cc info etc "cc: @garybernhardt "
+tweet = re.sub('(@\w*\W\s)*(RT\W)*(cc\W\s)*(#\w+\s*)*(http.+)*(\s{2})*','',tweet)
 print('After change:  ',tweet)
