@@ -25,13 +25,6 @@ print('\n=== Task #4 ===')
 # Очистите следующий твит, чтобы он содержал только одно сообщение пользователя.
 # То есть, удалите все URL, хэштеги, упоминания, пунктуацию, RT и CC.
 tweet = '''Good advice! RT @TheNextWeb: What I would do differently if I was learning to code today https://t.co/lbwej0pxOd cc: @garybernhardt #rstats'''
-print(tweet)
-tweet = re.sub('RT\s@\w+:\s','',tweet)      # remove RT info etc "RT @ThNextWeb "
-print(tweet)
-tweet = re.sub('cc:\s@\w+\s','',tweet)      # remove cc info etc "cc: @garybernhardt "
-print(tweet)
-tweet = re.sub('(#\w+\s*)*','',tweet)      # remove hashtag etc "#rstats"
-print(tweet)
-tweet = re.sub('#\w+\s*','',tweet)      # remove cc info etc "cc: @garybernhardt "
-print(tweet)
-
+print('Before change: ',tweet)
+tweet = re.sub('(@\w*\W\s)*(RT\W)*(cc\W\s)*(#\w+\s*)*(http.+)*(\s{2})*','',tweet)      # remove cc info etc "cc: @garybernhardt "
+print('After change:  ',tweet)
