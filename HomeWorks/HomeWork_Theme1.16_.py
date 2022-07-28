@@ -1,5 +1,6 @@
 from array import array as arr
 from random import random
+from random import  randrange
 from collections import deque
 from time import time
 # import os
@@ -61,6 +62,7 @@ def mergesort(a):
 def stack_list(from_, to):         # move data from stack to tmp list
     while len(from_) > 0:
         to.append(from_.pop())
+
 
 print('=== Task 1 анализ времени работы каждого алгоритма ===')
 # Дан массив вещественных чисел из 9000 элементов, формируемых с помощью датчика случайных чисел.
@@ -150,19 +152,93 @@ print('\n=== Task 4 планировщик очередей ===')
 # В случае равенства приоритетов обрабатывается очередь, которая имеет наибольшую длину.
 # Напечатать порядок обслуживания очередей.
 
-queue1 = [4, 3, 2, 1]      # testing queue1
-queue2 = [5, 6, 7, 2]      # testing queue2
-queue3 = [8, 1, 4, 3]      # testing queue3
-queue4 = [2, 1, 5, 4]      # testing queue4
+# queue1 = [4, 3, 2, 1]      # testing queue1
+# queue2 = [5, 6, 7, 2]      # testing queue2
+# queue3 = [8, 1, 4, 3]      # testing queue3
+# queue4 = [2, 1, 5, 4]      # testing queue4
 
-# while (queue1 & queue2 & queue3 & queue4) > 0:
-if queue1[-1] < queue2[-1]:
-    if queue2[-1] < queue3[-1]:
-        if queue3[-1] < queue4[-1]:
-            print("queue4")
-        else:
-            print("queue3")
-    else:
-        print("queue2")
-else:
-    print("queue1")
+m = 10  # lenght of stacks
+
+queue1 = [int(randrange(1, 11)) for i in range(m)]
+queue2 = [int(randrange(1, 11)) for i in range(m)]
+queue3 = [int(randrange(1, 11)) for i in range(m)]
+queue4 = [int(randrange(1, 11)) for i in range(m)]
+
+
+
+print("\nQueue 1 ", queue1)
+print("Queue 2 ", queue2)
+print("Queue 3 ", queue3)
+print("Queue 4 ", queue4,'\n')
+i=0
+n = len(queue1) + len(queue2) +len(queue3) + len(queue4)
+while i < n:
+    # print('Start', i, 'from', n)
+    tmp = []
+    for item in queue1,queue2,queue3,queue4:
+        if len(item)> 0:
+            tmp.append(item[-1])
+    # print(tmp)
+    # mx = max(tmp)
+    try:
+        mx = max(tmp)
+    except ValueError:
+        i+=1
+        mx = 0
+        continue
+    count = tmp.count(mx)
+    # print('Max is',mx,'and it count is =',count)
+    if count == 1:
+        # print('count == 1')
+        # for item in queue1,queue2,queue3,queue4:
+        #     if len(item) > 0:
+        #         if item[-1] == mx:
+        #             print('number {0}'.format(item.pop()), end=',')
+        #             # item.pop()    works with it
+        #             count = 0
+        if len(queue1) > 0:
+            if queue1[-1] == mx:
+                print('number', queue1.pop(), 'Queue 1', end=',')
+                mx,count = 0,0
+        if len(queue2) > 0:
+            if queue2[-1] == mx:
+                print('number', queue2.pop(), 'Queue 2', end=',')
+                mx,count = 0,0
+        if len(queue3) > 0:
+            if queue3[-1] == mx:
+                print('number', queue3.pop(), 'Queue 3', end=',')
+                mx,count = 0,0
+        if len(queue4) > 0:
+            if queue4[-1] == mx:
+                print('number', queue4.pop(), 'Queue 4', end=',')
+                mx,count = 0,0
+
+    elif count > 1:
+        if 0 < len(queue1) >= (len(queue2) & len(queue3) & len(queue4)):
+            if queue1[-1] == mx:
+                print('number', queue1.pop(), 'Queue 1', end=',')
+                mx = 0
+        if 0 < len(queue2) >= (len(queue1) & len(queue3) & len(queue4)):
+            if queue2[-1] == mx:
+                print('number', queue2.pop(), 'Queue 2', end=',')
+                mx = 0
+        if 0 < len(queue3) >= (len(queue1) & len(queue2) & len(queue4)):
+            if queue3[-1] == mx:
+                print('number', queue3.pop(), 'Queue 3', end=',')
+                mx = 0
+        if 0 < len(queue4) >= (len(queue1) & len(queue2) & len(queue3)):
+            if queue4[-1] == mx:
+                print('number', queue4.pop(), 'Queue 4', end=',')
+                mx = 0
+    i += 1
+    # print("Queue 1 ", queue1)
+    # print("Queue 2 ", queue2)
+    # print("Queue 3 ", queue3)
+    # print("Queue 4 ", queue4)
+    # print('End',i,'from',n)
+print('\nEnd of all queues')
+
+
+
+
+
