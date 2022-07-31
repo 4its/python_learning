@@ -10,7 +10,7 @@ from figure import *    # importing all features from figure package
 # from figure import triangle_define
 
 
-print('\n=== Tesk 1 ===')
+print('\n=== Task 1 ===')
 a = int(input('Please, enter number a: '))
 b = int(input('Please, enter number b: '))
 # even od odd
@@ -24,7 +24,7 @@ wn.summ(a, b)
 # find squared a and b
 wn.sqr(a, b)
 
-print('\n=== Tesk 2 and 3 by third scenario ===')
+print('\n=== Task 2 and 3 by third scenario ===')
 print('Enter triangle sides length')
 try:            # lets use error exception for using default data when entered wrong data
     a = int(input("Side 1 length is: "))        # entering side
