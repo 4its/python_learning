@@ -1,38 +1,78 @@
-from array import array as arr
+
+from array import array # import array
 from random import random
 
+def create_random(n = 10):
+    arr = [int(random()*100) for i in range(n)]
+    return arr
 
-def create_random(n = int(random()*100)):
-    return arr('i',[int(random()*100) for i in range(n)])
-
-def create_manual(a):
-    a = arr('i')
-    n = int(input('Etnter length of array: '))
+def create_manual(n = 10):
+    arr = []
     for i in range(n):
-        b = int(input('Enter element of array: '))
-        a.append(b)
-    return a
+        a = 'Enter element '+ str(i+1)+' from '+str(n)+': '
+        arr.append(int(input(a)))
+    return arr
 
-def print_array(array):
-    n = len(array)
-    print('Numbers in array: ')
-    for item in array:
-        print(item)
+def create_from_file(file, n = 10):
+    try:
+        fo = open(file, 'r')
+    except FileNotFoundError:
+        nums_arr = str()
+        for i in range(n):
+            nums_arr = nums_arr + str(int(random()*100))+' '
+        fo = open(file, 'w')
+        fo.write(nums_arr)
+    arr = list(fo.read().split())
+    print(arr)
+    fo.close()
+    for element in arr:
+        element = int(element)
+    print(arr)
+    return arr
 
+def printarray(array):
+    print('Elements in array is:',*array)
 
-massiv = ('i', [33, 47, 73, 60, 21, 75, 46, 93, 13, 79])    # study array
-print(massiv)
+def find_value(arr, fv):
+    fva = []
+    for i,j in enumerate(arr):
+        if j == fv:
+            fva.append(i)
+    if len(fva) > 0:
+        print('Indexes of number', fv,'in array is:',*fva)
+    else:
+        print('No indexes of',fv ,'in array' )
 
-for a in massiv:
-    print(a)
+def delete_value(arr, fv):
+    i = 0
+    while i < len(arr):
+        if arr[i] == fv:
+            arr.pop(i)
+        i+=1
+    return arr
 
-for b in range(0, len(massiv)):
-    print(f'massiv[{b}] = {massiv[b]}')
+def average(arr):
+    sum = 0
+    for i in arr:
+        sum = sum + int(i)
+    return sum / len(arr)
 
+def summ_arrays(arr1, arr2):
+    if len(arr1) == len(arr2):
+        arr3 = []
+        for i in range(len(arr1)):
+            arr3.append(arr1[i]+arr2[i])
+        return arr3
 
+    else:
+        print("Arrays length isn't equal. Can's sum arrays with different length")
 
+# sample = array('i',[10, 50, 20, 30, 40 ,50 ,60, 70, 50])
 
+sample = create_from_file('test.txt', 10)
 
+printarray(sample)
 
-# B = [x for x in b if x % 2 == 0]
-# print(sum(B))
+find_value(sample, 75)
+
+print(*delete_value(sample, 50))
