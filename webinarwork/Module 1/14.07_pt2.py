@@ -1,6 +1,6 @@
 # Работа с файловой системой
-f = open('../files/example.txt', 'r')
-f2 = open('../files/example.txt', 'r+')
+f = open('../../files/example.txt', 'r')
+f2 = open('../../files/example.txt', 'r+')
 # print(*f)   # Выводит содержимое файла целиком
 # print(f)    # выводим объект
 
@@ -28,6 +28,6 @@ import os
 print("Текущая деректория:", os.getcwd())
 os.chdir('/users/4its/')
 print("Текущая деректория:", os.getcwd())
-os.chdir('../..')
+os.chdir('../../..')
 print("Текущая деректория:", os.getcwd())
 
