@@ -182,3 +182,13 @@ class Car2:
         return message2
 car_a2 = Car2()
 print(car_a2.start())
+
+print('\n\n')
+
+class Car3:
+
+    @staticmethod
+    def get_class_details():
+        print ("This is a car class")
+
+Car3.get_class_details()
