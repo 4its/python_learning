@@ -161,15 +161,15 @@ print('\n=== Task #2 класс – списки целых чисел ===')
 # print(nl1 + nl2)
 
 print('\n=== Task #3 программа с классом Student ===')
-def callName():
+def callName():     # func that promt to type name manualy
     name = input('Enter name of student: ')
     return name
 
-def callAge():
+def callAge():      # func that promt to type name manualy
     age = int(input("Enter student's age: "))
     return age
 
-def callGroup():
+def callGroup():    # func that promt to type groupNumber manualy
     group = input("Enter group of student: ")
     return group
 
@@ -199,6 +199,7 @@ class Student:
         self.getName()
         self.getAge()
         self.getGroupNumber()
+        print("-----------------")
 
 
 s1 = Student()
@@ -207,8 +208,35 @@ s3 = Student()
 s4 = Student()
 s5 = Student()
 
-print(' Student #1')
+# Five times call setNameAge method with manual preset
+s1.setNameAge('Alex', 17)
+s2.setNameAge('Max', 18)
+s3.setNameAge('Fill', 19)
+s4.setNameAge('Bart', 20)
+s5.setNameAge('Lisa', 21)
+
+# Five times call setGroupNumber method with manual preset
+s1.setGroupNumber('10A')
+s2.setGroupNumber('11A')
+s3.setGroupNumber('12A')
+s4.setGroupNumber('13A')
+s5.setGroupNumber('14A')
+
+# # User typed change of params Name, Age, Group
+# s1.setNameAge(callName(), callAge())
+# s1.setGroupNumber(callGroup())
+# s2.setNameAge(callName(), callAge())
+# s2.setGroupNumber(callGroup())
+# s3.setNameAge(callName(), callAge())
+# s3.setGroupNumber(callGroup())
+# s4.setNameAge(callName(), callAge())
+# s4.setGroupNumber(callGroup())
+# s5.setNameAge(callName(), callAge())
+# s5.setGroupNumber(callGroup())
+
+# print result prnt method uset three other get methods
 s1.prnt()
-s1.setNameAge(callName(), callAge())
-s1.setGroupNumber(callGroup())
-s1.prnt()
+s2.prnt()
+s3.prnt()
+s4.prnt()
+s5.prnt()
