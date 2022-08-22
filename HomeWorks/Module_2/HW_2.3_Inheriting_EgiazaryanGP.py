@@ -19,7 +19,7 @@ class dot:
 
 class circle(dot):
     def __init__(self, x, y, r, c='white (default)'):
-        super(circle, self).__init__(x, y, c)
+        super().__init__(x, y, c)
         self.r = r
 
     def prnt(self):
@@ -29,7 +29,7 @@ class circle(dot):
         print('color is:  ', self.color)
 
     def setColorС(self):
-        super(circle, self).setColor()      #this methoc calls to DOT class. Also we can call "setColor" method from DOT class with same result
+        super().setColor()      #this methoc calls to DOT class. Also we can call "setColor" method from DOT class with same result
 
     def circleS(self):
         print('Area of circle is: ', pow(pi * self.r, 2))
@@ -40,7 +40,7 @@ class circle(dot):
 
 class sphere(circle):
     def __init__(self, x, y, rs, rb, c='white (default)'):
-        super(circle, self).__init__(x, y, c)
+        super().__init__(x, y, c)
         self.rs = rs
         self.rb = rb
 
@@ -97,7 +97,7 @@ class Book:
 
 class publishing_house(Book):
     def __init__(self, title, author, pages, c, lng = 'Russian (by Default)'):
-        super(publishing_house, self).__init__(title, author, pages)
+        super().__init__(title, author, pages)
         self.circulation = c
         self.language = lng
 
@@ -137,6 +137,7 @@ print('\n')         #spacer
 ##Checking Publishing_house class
 book2 = publishing_house('20000 Leagues Under the Sea', 'Jules Verne', 514, 20000)
 book2.prnt()
+print('\n')
 book2.setPr()           # not added checking of entered value... If it needed I'll do it
 book2.prnt()
 print("Price for book -",book2.title, "(",book2.pages ,"pages ) is -",
