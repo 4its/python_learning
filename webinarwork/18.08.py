@@ -74,35 +74,35 @@
 # cell_phone_a.radio_method()
 # cell_phone_a.test()
 
-from abc import ABC, abstractmethod
-
-
-class Absclass(ABC):
-    def print(self, x):
-        print("Passed value: ", x)
-
-    @abstractmethod
-    def task(self):
-        print("We are inside Absclass task")
-
-class test_class(Absclass):
-    def task(self, value = 2):
-        print("We are inside test_class task")
-        print("Value =", value)
-
-    @abstractmethod
-    def my_method(self):
-        pass
-
-class example_class(test_class):
-    def task(self):
-        print("We are inside example_class task")
-    def my_method(self):
-        print('Print from example_clas - my_method')
-
-example_obj = example_class()
-example_obj.task()
-example_obj.print(200)
+# from abc import ABC, abstractmethod
+#
+#
+# class Absclass(ABC):
+#     def print(self, x):
+#         print("Passed value: ", x)
+#
+#     @abstractmethod
+#     def task(self):
+#         print("We are inside Absclass task")
+#
+# class test_class(Absclass):
+#     def task(self, value = 2):
+#         print("We are inside test_class task")
+#         print("Value =", value)
+#
+#     @abstractmethod
+#     def my_method(self):
+#         pass
+#
+# class example_class(test_class):
+#     def task(self):
+#         print("We are inside example_class task")
+#     def my_method(self):
+#         print('Print from example_clas - my_method')
+#
+# example_obj = example_class()
+# example_obj.task()
+# example_obj.print(200)
 
 
 
@@ -172,27 +172,27 @@ example_obj.print(200)
 # ip1.set_mask(23)
 # print(ip1.get_mask)
 
-# class IPAddress:
-#     def __init__(self, address, mask):
-#         self._address = address
-#         self._mask = int(mask)
-#
-#     @property
-#     def mask(self):
-#         return self._mask
-#
-#     @mask.setter
-#     def mask(self, mask):
-#         if not isinstance(mask, int):
-#             raise TypeError("Маска должна быть числом")
-#         if not mask in range(8, 32):
-#             raise ValueError("Маска должна быть в диапазоне от 8 до 32")
-#         self._mask = mask
-#
-# ip1 = IPAddress('10.1.1.1', 24)
-# print(ip1.mask)
-# ip1.mask = 30
-# print(ip1.mask)
+class IPAddress:
+    def __init__(self, address, mask):
+        self._address = address
+        self._mask = int(mask)
+
+    @property
+    def mask(self):
+        return self._mask
+
+    @mask.setter
+    def mask(self, mask):
+        if not isinstance(mask, int):
+            raise TypeError("Маска должна быть числом")
+        if not mask in range(8, 32):
+            raise ValueError("Маска должна быть в диапазоне от 8 до 32")
+        self._mask = mask
+
+ip1 = IPAddress('10.1.1.1', 24)
+print(ip1.mask)
+ip1.mask = 30
+print(ip1.mask)
 
 
 # from datetime import date
