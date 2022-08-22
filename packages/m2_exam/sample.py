@@ -20,8 +20,28 @@ class spisok:
     def fillrnd(self, strt=0, end=20):
         self.lst = [randint(strt, end) for i in range(self.n)]
 
-    def fillfromfile(self):
-        pass
+
+    def fillfromfile(self, file):
+        try:
+            nums_file = open(file, 'r')
+            nums_file.close()
+        except FileNotFoundError:
+            print("Ups! You forget to create file! I'll generate it for you.")
+            d = str()  # defining string
+            for i in range(100):  # defining count of numers that we add in string with spaces between
+                d = d + str(randint(a=0, b=20)) + ' '  # add randomly generated number in string
+            print("Let's write this numbers to file:", d)
+            file_nums = open(file, 'w')  # usr right 'w' to create file
+            file_nums.write(d)  # write our string to file
+            file_nums.close()  # close file
+            print("File successfully generated. Lets read it!\n")
+        nums_file = open(file, 'r')  # open file
+        nums = list(nums_file.read().split())  # creating list of nubers from file
+        nums_file.close()  # close file
+        sum, i = 0, 0  # simle counter and iterator
+        while i < len(nums):
+            sum += int(nums[1])  # add number from list to summ
+            i += 1
 
 
     def set_n1(self, n):
@@ -88,3 +108,14 @@ class spisok:
 
     # def __del__(self):              # destructor
     #     print('Object was deleted')
+
+
+def numsgen(file):  # func to generate nums.txt if it doesn't exist with random numbers
+    d = str()  # defining string
+    for i in range(100):  # defining count of numers that we add in string with spaces between
+        d = d + str(randint(a=0, b=20)) + ' '  # add randomly generated number in string
+    print("Let's write this numbers to file:", d)
+    file_nums = open(file, 'w')  # usr right 'w' to create file
+    file_nums.write(d)  # write our string to file
+    file_nums.close()  # close file
+    print("File successfully generated. Lets read it!\n")
