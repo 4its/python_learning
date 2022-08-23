@@ -257,16 +257,78 @@ import sqlite3
 #             print("Соединение с SQLite закрыто")
 # read_limited_rows(2)
 
+# import sqlite3
+# def update_sqlite_table():
+#     try:
+#         sqlite_connection = sqlite3.connect('sqlite_python.db')
+#         cursor = sqlite_connection.cursor()
+#         print("Подключен к SQLite")
+#         sql_update_query = """Update sqlitedb_developers set salary = 11000 where id = 4"""
+#         cursor.execute(sql_update_query)
+#         sqlite_connection.commit()
+#         print("Запись успешно обновлена")
+#         cursor.close()
+#     except sqlite3.Error as error:
+#         print("Ошибка при работе с SQLite", error)
+#     finally:
+#         if sqlite_connection:
+#             sqlite_connection.close()
+#             print("Соединение с SQLite закрыто")
+# update_sqlite_table()
+
+# import sqlite3
+# def update_sqlite_table(dev_id, salary):
+#     try:
+#         sqlite_connection = sqlite3.connect('sqlite_python.db')
+#         cursor = sqlite_connection.cursor()
+#         print("Подключен к SQLite")
+#         sql_update_query = """Update sqlitedb_developers set salary = ? where id = ?"""
+#         data = (salary, dev_id)
+#         cursor.execute(sql_update_query, data)
+#         sqlite_connection.commit()
+#         print("Запись успешно обновлена")
+#         cursor.close()
+#     except sqlite3.Error as error:
+#         print("Ошибка при работе с SQLite", error)
+#     finally:
+#         if sqlite_connection:
+#             sqlite_connection.close()
+#             print("Соединение с SQLite закрыто")
+# update_sqlite_table(3, 7500)
+
+# import sqlite3
+# def update_multiple_records(record_list):
+#     try:
+#         sqlite_connection = sqlite3.connect('sqlite_python.db')
+#         cursor = sqlite_connection.cursor()
+#         print("Подключен к SQLite")
+#
+#         sqlite_update_query = """Update sqlitedb_developers set salary = ? where id = ?"""
+#         cursor.executemany(sqlite_update_query, record_list)
+#         sqlite_connection.commit()
+#         print("Записей", cursor.rowcount, ". Успешно обновлены")
+#         sqlite_connection.commit()
+#         cursor.close()
+#     except sqlite3.Error as error:
+#         print("Ошибка при работе с SQLite", error)
+#     finally:
+#         if sqlite_connection:
+#             sqlite_connection.close()
+#             print("Соединение с SQLite закрыто")
+# records_to_update = [(9700, 4), (7800, 5), (8400, 6)]
+# update_multiple_records(records_to_update)
+
 import sqlite3
-def update_sqlite_table():
+def delete_record(dev_id):
     try:
         sqlite_connection = sqlite3.connect('sqlite_python.db')
         cursor = sqlite_connection.cursor()
         print("Подключен к SQLite")
-        sql_update_query = """Update sqlitedb_developers set salary = 11000 where id = 4"""
-        cursor.execute(sql_update_query)
+
+        sql_delete_query = """DELETE from sqlitedb_developers where id = ?"""
+        cursor.execute(sql_delete_query, dev_id)
         sqlite_connection.commit()
-        print("Запись успешно обновлена")
+        print("Запись успешно удалена")
         cursor.close()
     except sqlite3.Error as error:
         print("Ошибка при работе с SQLite", error)
@@ -274,4 +336,4 @@ def update_sqlite_table():
         if sqlite_connection:
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
-update_sqlite_table()
+delete_record(5)
