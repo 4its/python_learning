@@ -121,7 +121,7 @@ class Spisok:
 
 
 print('==arr1==')
-g = Spisok(20)
+g = Spisok(25)
 # g.set_atr('i')      # Not defined fillers to others types of arrays, but all other methos will work with them
 g.fillrnd()         # filling by randint function. You may add some attribute like g.fillrnd(1,100) to it.
 g.findfirst(10)     # try to find first value 10 in first array
@@ -130,7 +130,7 @@ g.delfv(5)          # try to delete firs found value 5 in array. If we haven't t
 
 print('\n==arr2==')
 
-j = Spisok(20)
+j = Spisok(25)
 j.fillfromfile('list2.txt')   # filling by randint function. You may add some attribute like j.fillfromfile('list2.txt', 1, 100)  to it
 j.prnt()            # print our array
 j.findall(10)       # try to find ALL values 10 in second array
@@ -148,8 +148,6 @@ g.prnt()
 print('Finnaly we have array2:   ', end='')
 j.prnt()
 
+g + j
 
-
-# g + j
-
-print('\n== Detroctor time ===')
+print('\n== Destructor time ===')
