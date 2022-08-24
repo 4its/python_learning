@@ -1,63 +1,70 @@
 from random import randint
 from os import remove
 import array as arr
+import json
 
 
-class spisok:
+class Spisok:
 
-    def __init__(self, n):          # constructor
-        if 0 < n <= 20:
+    def __init__(self, n, atr='i'):          # constructor
+        self.atr = atr
+        if 0 < n <= 50:
             self.n = n
         else:
             i = True
-            while i == True:
+            while i:
                 i = False
-                n = int(input('Err: Value must be int and between 0 and 20: '))
-                if 0 < n <= 20:
+                n = int(input('Err: Value must be int and between 0 and 50: '))
+                # self.n = n if 0 < n <= 50 else i = True        # Didn't work =(
+                if 0 < n <= 50:
                     self.n = n
                 else:
                     i = True
 
-    def set_atr(self, atr):
-        self.atr = atr
+    def set_atr(self, atr):  # method to change atr of array (fillers will not work with others types of arrays)
+        self.atr = atr       # if we want to use others types of arrays - we neet to add some way thought IF operator
 
-    def fillrnd(self, strt=0, end=20):
-        self.lst = (self.atr ,[randint(strt, end) for i in range(self.n)])
+    def fillrnd(self, strt=0, end=20):          # use randint func to fill array. Default range is 0,20
+        self.lst = arr.array(self.atr, [randint(strt, end) for i in range(self.n)])
 
-    def fillfromfile(self, file):
+    def fillfromfile(self, file, strt=0, end=20):
         try:
             nums_file = open(file, 'r')
             nums_file.close()
         except FileNotFoundError:
             print("Ups! You forget to create file! I'll generate it for you.")
             d = str()  # defining string
-            for i in range(self.n):  # defining count of numers that we add in string with spaces between
-                d = d + str(randint(a=0, b=20)) + ' '  # add randomly generated number in string
+            for i in range(self.n * 2):  # defining count of numers that we add in string with spaces between
+                d = d + str(randint(strt, end)) + ' '  # add randomly generated number in string
             print("Let's write this numbers to file:", d)
             file_nums = open(file, 'w')  # usr right 'w' to create file
             file_nums.write(d)  # write our string to file
             file_nums.close()  # close file
-            print("File successfully generated. Lets read it!\n")
+            print("File successfully generated. Lets read it and took", self.n, "from it!")
         nums_file = open(file, 'r')  # open file
         nums = list(nums_file.read().split())  # creating list of nubers from file
         nums_file.close()
-        remove(file)
-        self.lst = arr.array(self.atr,[int(nums[i]) for i in range(self.n)])
+        remove(file)      # Will remove file after close
+        self.lst = arr.array(self.atr, [int(nums[i]) for i in range(self.n)])
 
+    def wr2file(self, file):        # Use json library to write array into file
+        with open(file, 'w') as file:
+            json.dump(self.lst.tolist(), file)
+
+    def wrFromFile(self, file):     # Use json to read file that was written by wr2file method
+        with open(file, 'r') as file:
+            self.lst = arr.array(self.atr, json.load(file))
 
     def prnt(self):
-        print(*self.lst)
+        print(self.lst)
 
     def findfirst(self, fv):
         # if fv not in self.lst:
-        #     print('No value', fv, 'in list.')
+        #     print('No value', fv, 'in array.')
         # else:
-        #     for i,item in enumerate(self.lst):
-        #         if item == fv:
-        #             print('Found value',fv ,'at position', i)
-        #             # return i          # as asked in task
-        #             break
-        return self.lst.index(fv)
+        #     print('Found value',fv ,'at position', self.lst.index(fv))
+        print('No value', fv, 'in array.') if fv not in self.lst else print('Found value', fv, 'at position',
+                                                                            self.lst.index(fv))
 
     def findall(self, fv):
         if fv not in self.lst:
@@ -72,53 +79,43 @@ class spisok:
             print('Value', fv, 'not in list.')
         else:
             self.lst.remove(fv)
-            self.prnt()             #output after delete
+            print('deleted value', fv, 'in array! Array after delete below')
+            self.prnt()             # output after delete
 
     def delallv(self, fv):          # Delete ALL finded values in list
         if fv in self.lst:
             tmp = [i for i, item in enumerate(self.lst) if item == fv]
             for item in reversed(tmp):
                 self.lst.pop(item)
-            self.prnt()             #output after delete
+            self.prnt()             # output after delete
         else:
             print('Value', fv, 'not in list.')
 
     def prnt(self):
         print(self.lst)
-        #print(*self.lst[1], sep=', ', end='.\n')
+        # print(*self.lst[1], sep=', ', end='.\n')
+
+    def intersection(self, other):
+        tmp = []
+        for item in self.lst:
+            if item in other.lst and item not in tmp:
+                tmp.append(item)
+        print(tmp)
+        tmp = arr.array(self.atr, tmp)
+        return tmp
 
     def __add__(self, other):
+        # if self.lst[0] == other.lst[0] and len(self.lst[1]) == len(other.lst[1]):
+        #     self.tmp1, other.tmp1 = self.lst[1], self.lst[1]
+        #     tmp = arr.array(self.atr, [(self.tmp1[i]+other.tmp1[i]) for i in range(len(self.tmp1))])
         if len(self.lst) == len(other.lst):
-            tmp = [(self.lst[i]+other.lst[i]) for i in range(len(self.lst))]
-            print('Lists after summ:', tmp)
+            tmp = arr.array(self.atr, [self.lst[i] + other.lst[i] for i in range(len(self.lst))])
+            print('Lists after summ:        ', tmp)
             # return tmp
         else:
-            print("We CAN'T summ selected lst becose they have different length")
+            print("We CAN'T summ selected lists becose they have different length")
+            # return "We CAN'T summ selected lists becose they have different length"
 
-    # def __del__(self):              # destructor
-    #     print('Object was deleted')
+    def __del__(self):              # destructor
+        print('Object was deleted')
 
-
-def numsgen(file):  # func to generate nums.txt if it doesn't exist with random numbers
-    d = str()  # defining string
-    for i in range(100):  # defining count of numers that we add in string with spaces between
-        d = d + str(randint(a=0, b=20)) + ' '  # add randomly generated number in string
-    print("Let's write this numbers to file:", d)
-    file_nums = open(file, 'w')  # usr right 'w' to create file
-    file_nums.write(d)  # write our string to file
-    file_nums.close()  # close file
-    print("File successfully generated. Lets read it!\n")
-
-
-g = spisok(20)
-g.set_atr('i')
-g.fillrnd()
-g.prnt()
-
-j = spisok(20)
-j.set_atr('i')
-j.fillrnd()
-j.prnt()
-
-g + j
-# print(g.findfirst(10))
