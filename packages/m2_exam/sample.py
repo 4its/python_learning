@@ -119,3 +119,4 @@ class Spisok:
     def __del__(self):              # destructor
         print('Object was deleted')
 
+
